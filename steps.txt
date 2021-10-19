@@ -1,0 +1,20 @@
+npm i dotenv
+npm i express mongoose
+npm i --save-dev nodemon
+npm install serve-favicon
+npm install --save mongoose-unique-validator
+npm install express-validator
+npm i winston   // pkg for storing err logs
+npm i winston-mongodb   // pkg for storing err logs in mongodb
+npm install jsonwebtoken    // for generating token for authenticated user
+npm install bcryptjs    // hash user pass
+
+npm install --save multer   // for uploading images
+
+
+
+
+
+
+
+

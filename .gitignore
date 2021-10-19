@@ -1,7 +1,15 @@
+node_modules
+
 .vscode
 .history
 .env
 error_logs
+*.png
+*.jpg
+*.jpeg
+*.ini
+
+ads.apk
 
 !backend/images/**
 
