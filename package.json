@@ -1,0 +1,29 @@
+{
+  "name": "",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "apk apis",
+  "main": "server.js",
+  "scripts": {
+    "test": "nodemon --watch backend --exec node experimental-modules server.js",
+    "start": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/arihant2/shank.git"
+  },
+  "keywords": [
+    "\"nodejs\"",
+    "\"express\"",
+    "\"mongodb\"",
+    "\"api\"",
+    "\"apk\"",
+    "\"ads\""
+  ],
+  "author": "arihant2",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/arihant2/shank/issues"
+  },
+  "homepage": ""
+}

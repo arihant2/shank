@@ -1,0 +1,7 @@
+.vscode
+.history
+.env
+error_logs
+
+!backend/images/**
+
