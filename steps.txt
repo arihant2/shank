@@ -12,7 +12,8 @@ npm install bcryptjs    // hash user pass
 npm install --save multer   // for uploading images
 
 
-
+npm uninstall nodemon
+npm i nodemon
 
 
 
