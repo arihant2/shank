@@ -2,14 +2,21 @@ import mongoose from 'mongoose';
 import uniqueValidator from 'mongoose-unique-validator';
 
 const userSchema = mongoose.Schema({
-    username: { type: String, required: true, minLength: 4 },
-    email: { type: String, required: true, unique: true,
+    username: { type: String, trim: true, required: true, minLength: 4, maxLength: 20 },
+    email: { type: String, trim: true, required: true, unique: true,
         match: /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/
     },
-    password: { type: String, required: true, minLength: 8 },
+    password: { type: String, trim: true, required: true, minLength: 8 , maxLength: 20 },
+    phone: { type: String, trim: true, minLength: 10, maxLength: 10 },
 
-    phone: { type: String, minLength: 10, maxLength: 10 },
-    ownership: { type: String, default: 'user' }
+    profile_image: String,
+    aboutme: { type: String, trim: true, maxLength: 250 },
+    website: { type: String, trim: true, maxLength: 25 },
+    address: { type: String, trim: true, maxLength: 70 },
+    facebook: { type: String, trim: true, maxLength: 15},
+    instagram: { type: String, trim: true, maxLength: 15 },
+
+    ownership: { type: String, trim: true, default: 'user' }
 
 }, { timestamps: true } );
 

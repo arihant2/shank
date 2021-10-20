@@ -34,7 +34,7 @@ mongoose.connect(
     }
 ).then(() => {
     app.listen(port);
-    console.log(`Connection is established at \nhttp://${host}:${port} OR \nhttps://shank0.herokuapp.com/\n`);
+    console.log(`Connection is established at \nhttp://${host}:${port} OR \nhttps://shank0.herokuapp.com\n`);
 }).catch(err => errLogsUtility.error(err.message));
 
 // mongoose.set('useFindAndModify',false);

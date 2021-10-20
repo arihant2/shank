@@ -12,7 +12,7 @@ export const signupController =  tryCatchUtility(async (req, res) => {
     const existingEmail = await userModel.findOne({ email: req.body.email }, { _id: 1 }).lean();
     if(existingEmail) throw new generateErrUtility('Email already exists!',409);
 
-    const newUser = JSON.parse(JSON.stringify(req.body));   // deep copying - it doesn't affect original object
+    const newUser = JSON.parse(JSON.stringify(req.body));
 
     // encrypting password and adding it into user body
     delete newUser.password;
@@ -62,6 +62,12 @@ export const loginController = tryCatchUtility(async (req, res, next) => {
 
 // forget pass
 export const forgetPassController = tryCatchUtility(async (req, res, next) => {
+    // from update user controller
+    if(updates.password !== undefined) {
+        delete updates.password;
+        updates.password = await bcrypt.hash(req.body.password, 10);       // encrypt given password
+        if(!updates.password) throw new generateErrUtility('Something went wrong!\nPlease try again later...',500);
+    }
 
 });
 

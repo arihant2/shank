@@ -1,9 +1,17 @@
 // auth
 import { signupController, loginController, forgetPassController } from './auth.js';
 
-// import { getProfileController, updateProfileController, deleteProfileController } from './profile/index.js';
+// profile
+import { getProfileController, updateProfileController } from './profile.js';
 
+// ad
+import { getAdsController, postFreeAdController } from './ads.js';
 
+// categories
+import { getCategoriesController, getSubCategoriesController } from './categories.js';
+
+// others
+import { settingController, searchController } from './others.js';
 
 
 
@@ -12,8 +20,20 @@ export const signupApi = signupController;
 export const loginApi = loginController;
 export const forgetPassApi = forgetPassController;
 
+// profile
+export const getProfileApi = getProfileController;
+export const updateProfileApi = updateProfileController;
 
-// export const getProfileApi = getProfileController;
-// export const updateProfileApi = updateProfileController;
-// export const deleteProfileApi = deleteProfileController;
+// ad
+export const getAdsApi = getAdsController;
+export const postFreeAdApi = postFreeAdController;
+// export const resubmitAdApi = resubmitAdController;
+
+// categories
+export const getCategoriesApi = getCategoriesController;
+export const getSubCategoriesApi = getSubCategoriesController;
+
+// others
+export const settingApi = settingController;
+export const searchApi = searchController;
 

@@ -1,5 +1,5 @@
 npm i dotenv
-npm i express mongoose
+npm i express mongoose  X
 npm i --save-dev nodemon
 npm install serve-favicon
 npm install --save mongoose-unique-validator

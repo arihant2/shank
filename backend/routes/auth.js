@@ -8,5 +8,5 @@ const router = express.Router();
 export default router
     .post('/signup', validateDataUtility,signupApi)
     .post('/login', validateDataUtility,loginApi)
-    .post('/forgetpass', validateDataUtility,forgetPassApi);
+    .patch('/forgetpass', validateDataUtility,forgetPassApi);
 

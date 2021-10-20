@@ -1,10 +1,12 @@
 @host = http://localhost:5000
+
+# auth ->
 POST {{host}}/signup
 Content-Type: application/json
 
 {
-    "username": "user2",
-    "email": "user2@shank.com",
+    "username": "user3",
+    "email": "user3@shank.com",
     "password": "12345678",
     "phone": "1234567890"
 }
@@ -13,14 +15,112 @@ POST {{host}}/login
 Content-Type: application/json
 
 {
-    "email": "user2@shank.com",
+    "email": "user4@shank.com",
     "password": "12345678"
 }
 ###
-POST {{host}}/forgetpass
+# POST {{host}}/forgetpass
+# Content-Type: application/json
+
+# {
+#     "email": "user1@shank.com"
+# }
+###
+
+
+@token =  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOiI2MTZmZjI5MTFmMTI0MWI5YjFkYWEyYzYiLCJ1c2VybmFtZSI6InVzZXIyIiwiZ3JvdXAiOiJ1c2VyIiwiaWF0IjoxNjM0NzU3NjY5LCJleHAiOjE2MzQ4MDA4Njl9.sHBpl-FhiB6TNBETG88Jot7NkWYDPMm0efPbdXRslD0
+
+# profile ->
+GET {{host}}/profile
+Authorization: Bearer {{token}}
+###
+PUT {{host}}/editprofile
+Authorization: Bearer {{token}}
 Content-Type: application/json
 
 {
-    "email": "user1@shank.com"
+    "username": "user4",
+    "aboutme": "Kubernetes is an excellent open-source container orchestration platform that brings automatic scaling, automatic recovery, observability, and many more features.",
+    "phone": "6548234567",
+    "email": "user4@shank.com",
+    "website": "google.com",
+    "address": "Warsaw, Poland",
+    "facebook": "shank0",
+    "instagram": "shank0"
 }
+###
+
+
+# ads ->
+GET {{host}}/ad/featured
+Authorization: Bearer {{token}}
+###
+GET {{host}}/ad/favorite
+Authorization: Bearer {{token}}
+###
+GET {{host}}/ad/my
+Authorization: Bearer {{token}}
+###
+GET {{host}}/ad/pending
+Authorization: Bearer {{token}}
+###
+GET {{host}}/ad/hidden
+Authorization: Bearer {{token}}
+###
+GET {{host}}/ad/expired
+Authorization: Bearer {{token}}
+###
+GET {{host}}/ad/published
+Authorization: Bearer {{token}}
+###
+GET {{host}}/ad/resubmitted
+Authorization: Bearer {{token}}
+###
+
+# post ad
+POST {{host}}/postfreead
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+    "category": "Cars & bikes",
+    "subCategory": "x",
+    "title": "Land Rover Range Rover",
+    "description": "Powered seats, with buttons exquisite to the touch. Bespoke clock design. Lead-crystal champagne flutes. Every entertainment need and comfort catered for.",
+    "type": "Professional",
+    "brand": "Land Rover",
+    "year_of_reg": "2020",
+    "transmission": "automatic",
+    "features": "GPS,ABS,Security System",
+    "price": "13500",
+    "negotiate": "true",
+    "phone": "1234567890",
+    "city": "New Delhi",
+    "location": "Rohini",
+    "tag": "fast, fancy, new artificial leather interior, modular interior design",
+    "subscription": "premium"
+}
+###
+
+
+# categories ->
+GET {{host}}/categories
+###
+GET {{host}}/subcategories/617048136185af1f17651c34
+###
+
+
+# others ->
+PUT {{host}}/setting
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+    "username": "user2",
+    "email": "user2@shank.com",
+    "newPass": "12345678",
+    "confirmPass": "1234567"
+}
+###
+# GET {{host}}/search
 ###
