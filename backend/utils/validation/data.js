@@ -18,7 +18,7 @@ export const validateDataUtility = tryCatchUtility(async(req, res, next) => {
         if(data.email) await body('email','').isEmail().normalizeEmail().run(req);
 
     if(signup.test(url) || login.test(url) || forgetpass.test(url))
-        if(data.password) await body('password','').trim().isLength({ min: 8, max: 20 }).isAlphanumeric().run(req);
+        if(data.password) await body('password','').trim().isLength({ min: 8 }).isAlphanumeric().run(req);
 
     if(signup.test(url) || editprofile.test(url) || setting.test(url))
         if(data.username) await body('username','').trim().isLength({ min: 4, max: 20 }).isAlphanumeric().run(req);

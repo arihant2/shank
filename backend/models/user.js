@@ -6,7 +6,7 @@ const userSchema = mongoose.Schema({
     email: { type: String, trim: true, required: true, unique: true,
         match: /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/
     },
-    password: { type: String, trim: true, required: true, minLength: 8 , maxLength: 20 },
+    password: { type: String, trim: true, required: true, minLength: 8 },
     phone: { type: String, trim: true, minLength: 10, maxLength: 10 },
 
     profile_image: String,

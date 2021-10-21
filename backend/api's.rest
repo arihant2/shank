@@ -5,9 +5,9 @@ POST {{host}}/signup
 Content-Type: application/json
 
 {
-    "username": "user3",
-    "email": "user3@shank.com",
-    "password": "12345678",
+    "username": "user12345",
+    "email": "user12345@shank.com",
+    "password": "abcd123456",
     "phone": "1234567890"
 }
 ###
