@@ -5,9 +5,9 @@ POST {{host}}/signup
 Content-Type: application/json
 
 {
-    "username": "user12345",
-    "email": "user12345@shank.com",
-    "password": "abcd123456",
+    "username": "user12346",
+    "email": "user12348@shank.com",
+    "password": "12345671234567123456",
     "phone": "1234567890"
 }
 ###
@@ -19,12 +19,12 @@ Content-Type: application/json
     "password": "12345678"
 }
 ###
-# POST {{host}}/forgetpass
-# Content-Type: application/json
+PATCH {{host}}/resetpass
+Content-Type: application/json
 
-# {
-#     "email": "user1@shank.com"
-# }
+{
+    "email": "payisif827@forfity.com"
+}
 ###
 
 
@@ -52,28 +52,28 @@ Content-Type: application/json
 
 
 # ads ->
-GET {{host}}/ad/featured
+GET {{host}}/ads/featured
 Authorization: Bearer {{token}}
 ###
-GET {{host}}/ad/favorite
+GET {{host}}/ads/favorite
 Authorization: Bearer {{token}}
 ###
-GET {{host}}/ad/my
+GET {{host}}/ads/my
 Authorization: Bearer {{token}}
 ###
-GET {{host}}/ad/pending
+GET {{host}}/ads/pending
 Authorization: Bearer {{token}}
 ###
-GET {{host}}/ad/hidden
+GET {{host}}/ads/hidden
 Authorization: Bearer {{token}}
 ###
-GET {{host}}/ad/expired
+GET {{host}}/ads/expired
 Authorization: Bearer {{token}}
 ###
-GET {{host}}/ad/published
+GET {{host}}/ads/published
 Authorization: Bearer {{token}}
 ###
-GET {{host}}/ad/resubmitted
+GET {{host}}/ads/resubmitted
 Authorization: Bearer {{token}}
 ###
 

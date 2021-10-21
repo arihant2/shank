@@ -1,0 +1,162 @@
+* = mandatory fields
+
+
+Module	    signup
+Api 	    https://shank0.herokuapp.com/signup
+Method	    POST
+Headers	    Content-Type: application/json
+Params	    -
+Token	    -
+Body	    username*, email*, password*, phone*, ownership
+// in this, field 'ownership' will store one of these values -  admin|user
+// bydefault value will be 'user'
+
+
+Module	    login
+Api	        https://shank0.herokuapp.com/login
+Method	    POST
+Headers	    Content-Type: application/json
+Params	    -
+Token	    -
+Body	    email*, password*
+
+
+Module	    reset pass
+Api	        https://shank0.herokuapp.com/resetpass
+Method	    PATCH
+Headers	    Content-Type: application/json
+Params	    -
+Token	    -
+Body	    email*
+
+
+Module	    profile
+Api     	https://shank0.herokuapp.com/profile
+Method  	GET
+Headers	    -
+Params	    -
+Token	    required
+Body	    -
+
+
+Module	    edit profile
+Api     	https://shank0.herokuapp.com/editprofile
+Method  	POST
+Headers	    Content-Type: application/json OR multipart/form-data (to add an image)
+Params	    -
+Token	    required
+Body	    username, aboutme, phone, email, website, address, facebook, instagram, profile_image
+
+
+Module	    featured ads
+Api     	https://shank0.herokuapp.com/ads/featured
+Method  	GET
+Headers	    -
+Params	    other // i.e. featured
+Token	    required
+Body	    -
+
+
+Module	    favorite ads
+Api     	https://shank0.herokuapp.com/ads/favorite
+Method  	GET
+Headers	    -
+Params	    other // i.e. favorite
+Token	    required
+Body	    -
+
+
+Module	    my ads
+Api     	https://shank0.herokuapp.com/ads/my
+Method  	GET
+Headers	    -
+Params	    other // i.e. my
+Token	    required
+Body	    -
+
+
+Module	    pending ads
+Api     	https://shank0.herokuapp.com/ads/pending
+Method  	GET
+Headers	    -
+Params	    other // i.e. pending
+Token	    required
+Body	    -
+
+
+Module	    hidden ads
+Api     	https://shank0.herokuapp.com/ads/hidden
+Method  	GET
+Headers	    -
+Params	    other // i.e. hidden
+Token	    required
+Body	    -
+
+
+Module	    expired ads
+Api     	https://shank0.herokuapp.com/ads/expired
+Method  	GET
+Headers	    -
+Params	    other // i.e. expired
+Token	    required
+Body	    -
+
+
+Module	    published ads
+Api     	https://shank0.herokuapp.com/ads/published
+Method  	GET
+Headers	    -
+Params	    other // i.e. published
+Token	    required
+Body	    -
+
+
+Module	    resubmitted ads
+Api     	https://shank0.herokuapp.com/ads/resubmitted
+Method  	GET
+Headers	    -
+Params	    other // i.e. resubmitted
+Token	    required
+Body	    -
+
+
+Module	    post free ad
+Api     	https://shank0.herokuapp.com/postfreead
+Method  	POST
+Headers	    Content-Type: application/json OR multipart/form-data (to add an image)
+Params	    -
+Token	    required
+Body	    category*, subCategory*, title*, description*, type*, brand*, year_of_reg*, transmission*, , price*, phone*, city*, location*, tag*, subscription*, features, negotiate, ad_image, other
+// in this, field 'other' will store one of these values -  featured|favorite|my|pending|hidden|expired|published|resubmitted
+// bydefault value will be 'featured'
+
+
+Module	    categories
+Api     	https://shank0.herokuapp.com/categories
+Method  	GET
+Headers	    -
+Params	    -
+Token	    -
+Body	    -
+
+
+Module	    subcategories
+Api     	https://shank0.herokuapp.com/subcategories/617048136185af1f17651c34
+Method  	GET
+Headers	    -
+Params	    cid - category id
+Token	    -
+Body	    -
+
+
+Module	    setting
+Api 	    https://shank0.herokuapp.com/setting
+Method	    POST
+Headers	    Content-Type: application/json
+Params	    -
+Token	    required
+Body	    username, email, newPass, confirmPass
+
+
+
+

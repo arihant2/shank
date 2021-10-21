@@ -6,19 +6,19 @@ export const validateDataUtility = tryCatchUtility(async(req, res, next) => {
     const apisRegexp = {
         signup:         /^\/signup$/,
         login:          /^\/login$/,
-        forgetpass:     /^\/forgetpass$/,
+        resetpass:      /^\/resetpass$/,
         editprofile:    /^\/editprofile$/,
         setting:        /^\/setting$/
     };
 
     const { originalUrl:url, body:data } = req;
-    const { login, signup, forgetpass, editprofile, setting } = apisRegexp;
+    const { login, signup, resetpass, editprofile, setting } = apisRegexp;
 
-    if(signup.test(url) || login.test(url) || editprofile.test(url) || setting.test(url))
+    if(signup.test(url) || login.test(url) || editprofile.test(url) || setting.test(url) || resetpass.test(url))
         if(data.email) await body('email','').isEmail().normalizeEmail().run(req);
 
-    if(signup.test(url) || login.test(url) || forgetpass.test(url))
-        if(data.password) await body('password','').trim().isLength({ min: 8 }).isAlphanumeric().run(req);
+    if(signup.test(url) || login.test(url))
+        if(data.password) await body('password','').trim().isLength({ min: 8, max: 20 }).isAlphanumeric().run(req);
 
     if(signup.test(url) || editprofile.test(url) || setting.test(url))
         if(data.username) await body('username','').trim().isLength({ min: 4, max: 20 }).isAlphanumeric().run(req);

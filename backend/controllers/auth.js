@@ -1,5 +1,6 @@
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
+import nodemailer from 'nodemailer';
 
 import userModel from '../models/user.js';
 
@@ -61,13 +62,64 @@ export const loginController = tryCatchUtility(async (req, res, next) => {
 
 
 // forget pass
-export const forgetPassController = tryCatchUtility(async (req, res, next) => {
+export const resetPassController = tryCatchUtility(async (req, res, next) => {
     // from update user controller
-    if(updates.password !== undefined) {
-        delete updates.password;
-        updates.password = await bcrypt.hash(req.body.password, 10);       // encrypt given password
-        if(!updates.password) throw new generateErrUtility('Something went wrong!\nPlease try again later...',500);
-    }
+    // if(updates.password !== undefined) {
+    //     delete updates.password;
+    //     updates.password = await bcrypt.hash(req.body.password, 10);       // encrypt given password
+    //     if(!updates.password) throw new generateErrUtility('Something went wrong!\nPlease try again later...',500);
+    // }
+
+
+    // let sender, format;
+    // let sender=0, format=0;
+
+    // Generate test SMTP service account from ethereal.email
+    // Only needed if you don't have a real mail account for testing
+    const testAccount = await nodemailer.createTestAccount();
+    // nodemailer.createTestAccount((err, account) => {
+        // if(err) throw new generateErrUtility(err.message,500);
+
+        // sender details
+        const sender = nodemailer.createTransport({
+            host: "smtp.ethereal.email",
+            // host: testAccount.smtp.host,
+            // host: "account.smtp.host",
+            // service: "hotmail",
+            // service: "outlook",
+            // port: 587,
+            port: 465,
+            // port: testAccount.smtp.port,
+            // port: "account.smtp.port",
+            // secure: false,      // true for 465, false for other ports
+            // secure: testAccount.smtp.secure,
+            // secure: "account.smtp.secure",
+            // secure: true,
+            // ssl: 'NO',
+            auth: {
+                user: testAccount.user,     // generated ethereal user
+                // user: account.user,     // generated ethereal user
+                pass: testAccount.pass      // generated ethereal password
+                // pass: account.pass,     // generated ethereal user
+            },
+            tls: { rejectUnauthorized: false }      // when using localhost not actual domain
+        });
+
+        // console.log(req.body.email);
+        // mail format
+        const format = {
+            from: '"🐬 Shank" <noreply@shank.com>',
+            to: "arihantjain136@gmail.com",
+            subject: "Email Confirmation!",
+            text: "Hello.. this is text",
+            html: "<b>Hello.. this is html</b>",
+        };
+
+    // });
+
+    // console.log(sender, format);
+    // sending mail
+    const response = await sender.sendMail(format);
 
 });
 
