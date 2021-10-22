@@ -21,15 +21,6 @@ Token	    -
 Body	    email*, password*
 
 
-Module	    reset pass
-Api	        https://shank0.herokuapp.com/resetpass
-Method	    PATCH
-Headers	    Content-Type: application/json
-Params	    -
-Token	    -
-Body	    email*
-
-
 Module	    profile
 Api     	https://shank0.herokuapp.com/profile
 Method  	GET
@@ -158,5 +149,11 @@ Token	    required
 Body	    username, email, newPass, confirmPass
 
 
-
+Module	    search
+Api     	https://shank0.herokuapp.com/search/cars
+Method  	GET
+Headers	    -
+Params	    keyword
+Token	    -
+Body	    -
 

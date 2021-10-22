@@ -1,5 +1,5 @@
 // auth
-import { signupController, loginController, resetPassController } from './auth.js';
+import { signupController, loginController } from './auth.js';
 
 // profile
 import { getProfileController, updateProfileController } from './profile.js';
@@ -18,7 +18,7 @@ import { settingController, searchController } from './others.js';
 // auth
 export const signupApi = signupController;
 export const loginApi = loginController;
-export const resetPassApi = resetPassController;
+// export const resetPassApi = resetPassController;
 
 // profile
 export const getProfileApi = getProfileController;

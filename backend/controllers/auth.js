@@ -62,7 +62,7 @@ export const loginController = tryCatchUtility(async (req, res, next) => {
 
 
 // forget pass
-export const resetPassController = tryCatchUtility(async (req, res, next) => {
+/*export const resetPassController = tryCatchUtility(async (req, res, next) => {
     // from update user controller
     // if(updates.password !== undefined) {
     //     delete updates.password;
@@ -109,7 +109,7 @@ export const resetPassController = tryCatchUtility(async (req, res, next) => {
         // mail format
         const format = {
             from: '"🐬 Shank" <noreply@shank.com>',
-            to: "arihantjain136@gmail.com",
+            to: "payisif827@forfity.com",
             subject: "Email Confirmation!",
             text: "Hello.. this is text",
             html: "<b>Hello.. this is html</b>",
@@ -121,5 +121,5 @@ export const resetPassController = tryCatchUtility(async (req, res, next) => {
     // sending mail
     const response = await sender.sendMail(format);
 
-});
+});*/
 

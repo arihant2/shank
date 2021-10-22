@@ -8,5 +8,5 @@ const router = express.Router();
 
 export default router
     .put('/setting',validateTokenUtility,validateDataUtility,settingApi)
-    .get('/search',searchApi);
+    .get('/search/:keyword',searchApi);
 

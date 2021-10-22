@@ -1,6 +1,7 @@
 import bcrypt from 'bcryptjs';
 
 import userModel from '../models/user.js';
+import categoryModel from '../models/category.js';
 
 import { tryCatchUtility } from '../utils/errHandling/tryCatch.js';
 import { generateErrUtility } from '../utils/errHandling/generateErr.js';
@@ -36,6 +37,20 @@ export const settingController = tryCatchUtility(async (req, res) => {
 });
 
 export const searchController = tryCatchUtility(async (req, res) => {
+    // const regex = new RegExp(req.params.keyword,'i');       // i - case insensitive operator in regex
+    const regex = new RegExp('^.*'+req.params.keyword+'.*$','i');       // i - case insensitive operator in regex
+    // const regex = new RegExp('(^'+req.params.keyword+'.*$)|(^.*'+req.params.keyword+'.*$)|(^.*'+req.params.keyword+'$)','i');
+    // const regex = new RegExp('^('+req.params.keyword+'.*)|(.*'+req.params.keyword+'.*)|(.*'+req.params.keyword+')$','i');
+    // console.log(regex);
 
+    // const response = await categoryModel.find({ category: regex }).lean();
+    const response = await categoryModel.find({ $or: [ { category: regex }, { subCategories: regex } ] }).lean();
+// const response = await categoryModel.find({ $or: [ { category: { $regex: '^.*'+req.params.keyword+'.*$', $options: 'i' } }, { subCategories: regex } ] }).lean();
+    if(!response.length) return res.status(404).send(`Nothing found for searched item ${req.params.keyword}!<br>Try something else`);
+
+    res.status(200).json({
+        msg: 'Search successful!',
+        searchResult: response
+    });
 });
 
