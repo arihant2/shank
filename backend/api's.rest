@@ -19,12 +19,12 @@ Content-Type: application/json
     "password": "12345678"
 }
 ###
-# PATCH {{host}}/resetpass
-# Content-Type: application/json
+PATCH {{host}}/resetpass
+Content-Type: application/json
 
-# {
-#     "email": "payisif827@forfity.com"
-# }
+{
+    "email": "jitopov560@julsard.com"
+}
 ###
 
 

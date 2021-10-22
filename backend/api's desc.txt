@@ -118,7 +118,7 @@ Headers	    Content-Type: application/json OR multipart/form-data (to add an ima
 Params	    -
 Token	    required
 Body	    category*, subCategory*, title*, description*, type*, brand*, year_of_reg*, transmission*, , price*, phone*, city*, location*, tag*, subscription*, features, negotiate, ad_image, other
-// in this, field 'other' will store one of these values -  featured|favorite|my|pending|hidden|expired|published|resubmitted
+// in this, field 'other' will store one of these values -  featured|favorite|pending|hidden|expired|published|resubmitted
 // bydefault value will be 'featured'
 
 

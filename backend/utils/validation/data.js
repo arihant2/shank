@@ -21,13 +21,14 @@ export const validateDataUtility = tryCatchUtility(async(req, res, next) => {
         if(data.password) await body('password','').trim().isLength({ min: 8, max: 20 }).isAlphanumeric().run(req);
 
     if(signup.test(url) || editprofile.test(url) || setting.test(url))
-        if(data.username) await body('username','').trim().isLength({ min: 4, max: 20 }).isAlphanumeric().run(req);
+        if(data.username) await body('username','').trim().isLength({ max: 20 }).isAlphanumeric().run(req);
 
     if(signup.test(url) || editprofile.test(url))
         if(data.phone) await body('phone','').trim().isMobilePhone().run(req);
 
     if(editprofile.test(url)) {
         if(data.aboutme) await body('aboutme','').trim().isString().isLength({ max: 250 }).run(req);
+        if(data.website) await body('address','').trim().isString().isLength({ max: 70 }).run(req);
         if(data.address) await body('address','').trim().isString().isLength({ max: 70 }).run(req);
         if(data.facebook) await body('facebook','').trim().isString().isLength({ max: 15 }).run(req);
         if(data.instagram) await body('instagram','').trim().isString().isLength({ max: 15 }).run(req);

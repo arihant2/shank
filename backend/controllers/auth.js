@@ -1,6 +1,7 @@
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
-import nodemailer from 'nodemailer';
+// import nodemailer from 'nodemailer';
+import sendgridMail from '@sendgrid/mail';
 
 import userModel from '../models/user.js';
 
@@ -61,8 +62,8 @@ export const loginController = tryCatchUtility(async (req, res, next) => {
 });
 
 
-// forget pass
-/*export const resetPassController = tryCatchUtility(async (req, res, next) => {
+// reset pass
+export const resetPassController = tryCatchUtility(async (req, res, next) => {
     // from update user controller
     // if(updates.password !== undefined) {
     //     delete updates.password;
@@ -71,7 +72,7 @@ export const loginController = tryCatchUtility(async (req, res, next) => {
     // }
 
 
-    // let sender, format;
+    /*// let sender, format;
     // let sender=0, format=0;
 
     // Generate test SMTP service account from ethereal.email
@@ -119,7 +120,40 @@ export const loginController = tryCatchUtility(async (req, res, next) => {
 
     // console.log(sender, format);
     // sending mail
-    const response = await sender.sendMail(format);
+    const response = await sender.sendMail(format);*/
 
-});*/
+
+    const { body:{ email } } = req;
+
+    // check if email exists
+    const isEmailValid = await userModel.findOne({ email }).lean();
+    // if(!isEmailValid) throw new generateErrUtility("This email doesn't exist!",401);
+
+    const { SENDGRID_MAIL_APIKEY:sgm_key, sender_mail } = process.env;
+
+    sendgridMail.setApiKey(sgm_key);
+
+    // mail format
+    const format = {
+        to: email,
+        // from: { name: 'Shank 🐬', email: 'noreply@shank.com' },
+        from: { name: 'Shank 🐬', email: sender_mail },
+        // from: process.env.sender_mail,
+        subject: "Email Confirmation for password reset!",
+        text: "Please click below link to reset password. http://google.com/",
+        html: "<h3>Please click below link to reset password.</h3><br><a href='google.com'><strong>Click here<strong></a>",
+    };
+
+    // sending mail
+    const response = await sendgridMail.send(format);
+    // sendgridMail
+    //     .send(format)
+    //     .then(response => res.status(response.statusCode).send('Email verification mail sent!\nPlease verify email to reset password...'))
+    //     .catch(err => res.status(err.code).send(err.message));
+
+    // console.log('response ->\t',response);
+    if(!response) throw new generateErrUtility('Something went wrong!\nPlease try again later...',500);
+
+    res.status(202).send('Email verification mail sent!\nPlease verify email to reset password...');
+});
 

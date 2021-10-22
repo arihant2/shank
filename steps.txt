@@ -16,7 +16,9 @@ npm uninstall nodemon
 npm i nodemon
 
 npm i nodemailer    // for sending email
+npm install --save @sendgrid/mail       // for sending email
 
+npm uninstall nodemailer    // not working
 
 
 

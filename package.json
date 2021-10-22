@@ -27,6 +27,7 @@
   },
   "homepage": "",
   "dependencies": {
+    "@sendgrid/mail": "^7.5.0",
     "bcryptjs": "^2.4.3",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
@@ -35,7 +36,6 @@
     "mongoose": "^6.0.11",
     "mongoose-unique-validator": "^3.0.0",
     "multer": "^1.4.3",
-    "nodemailer": "^6.7.0",
     "nodemon": "^2.0.14",
     "serve-favicon": "^2.5.0",
     "winston": "^3.3.3",
