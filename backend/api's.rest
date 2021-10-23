@@ -15,15 +15,23 @@ POST {{host}}/login
 Content-Type: application/json
 
 {
-    "email": "user4@shank.com",
-    "password": "12345678"
+    "email": "lomanid564@ateampc.com",
+    "password": "askdj6464"
+}
+###
+PATCH {{host}}/verifyemail
+Content-Type: application/json
+
+{
+    "email": "lomanid564@ateampc.com"
 }
 ###
 PATCH {{host}}/resetpass
 Content-Type: application/json
 
 {
-    "email": "jitopov560@julsard.com"
+    "otp": "594334",
+    "newPass": "askdj6464"
 }
 ###
 

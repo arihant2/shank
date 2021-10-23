@@ -21,6 +21,24 @@ Token	    -
 Body	    email*, password*
 
 
+Module	    verify email
+Api	        https://shank0.herokuapp.com/verifyemail
+Method	    PATCH
+Headers	    Content-Type: application/json
+Params	    -
+Token	    -
+Body	    email*
+
+
+Module	    reset password
+Api	        https://shank0.herokuapp.com/resetpass
+Method	    PATCH
+Headers	    Content-Type: application/json
+Params	    -
+Token	    -
+Body	    otp*, newPass*
+
+
 Module	    profile
 Api     	https://shank0.herokuapp.com/profile
 Method  	GET

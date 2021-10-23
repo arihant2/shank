@@ -46,7 +46,7 @@ export const loginController = tryCatchUtility(async (req, res, next) => {
     if(!isPassValid) throw new generateErrUtility('Invalid credentials!',401);
 
     // create token
-    key = process.env.SERVER_SECRET + (Math.random() * 73478632587412567);
+    key = process.env.SERVER_SECRET + String(Math.random()).split('.')[1];
     const token = jwt.sign(
         { userid: response._id, username: response.username, group: response.ownership },
         key,
@@ -61,9 +61,9 @@ export const loginController = tryCatchUtility(async (req, res, next) => {
     });
 });
 
-
-// reset pass
-export const resetPassController = tryCatchUtility(async (req, res, next) => {
+let otp, user_id;
+// verify email
+export const verifyEmailController = tryCatchUtility(async (req, res, next) => {
     // from update user controller
     // if(updates.password !== undefined) {
     //     delete updates.password;
@@ -126,12 +126,18 @@ export const resetPassController = tryCatchUtility(async (req, res, next) => {
     const { body:{ email } } = req;
 
     // check if email exists
-    const isEmailValid = await userModel.findOne({ email }).lean();
+    // const isEmailValid = await userModel.findOne({ email }).lean();
+    user_id = (await userModel.findOne({ email }).select('_id').lean() || {})._id;
+    // console.log('id',user_id);
+    // { _id:user_id } = await userModel.findOne({ email }).select('_id').lean()._id;
     // if(!isEmailValid) throw new generateErrUtility("This email doesn't exist!",401);
+    if(!user_id) throw new generateErrUtility("This email doesn't exist!",401);
 
     const { SENDGRID_MAIL_APIKEY:sgm_key, sender_mail } = process.env;
 
     sendgridMail.setApiKey(sgm_key);
+
+    otp = String(Math.random()).split('.')[1].substring(1,7);
 
     // mail format
     const format = {
@@ -140,8 +146,10 @@ export const resetPassController = tryCatchUtility(async (req, res, next) => {
         from: { name: 'Shank 🐬', email: sender_mail },
         // from: process.env.sender_mail,
         subject: "Email Confirmation for password reset!",
-        text: "Please click below link to reset password. http://google.com/",
-        html: "<h3>Please click below link to reset password.</h3><br><a href='google.com'><strong>Click here<strong></a>",
+        // text: "Please click below link to reset password. http://google.com/",
+        text: `Please use the below code to reset password in the app. ${otp}`,
+        // html: "<h3>Please click below link to reset password.</h3><br><a href='google.com'><strong>Click here<strong></a>",
+        html: `<h3>Please use the below code to reset password in the app.</h3><br><strong>${otp}<strong>`,
     };
 
     // sending mail
@@ -155,5 +163,28 @@ export const resetPassController = tryCatchUtility(async (req, res, next) => {
     if(!response) throw new generateErrUtility('Something went wrong!\nPlease try again later...',500);
 
     res.status(202).send('Email verification mail sent!\nPlease verify email to reset password...');
+});
+
+// reset pass
+export const resetPassController = tryCatchUtility(async (req, res, next) => {
+    // if(!otp || !user_id) throw new generateErrUtility('Something went wrong!\nPlease try again later...',500);
+    // console.log(otp,user_id);
+
+    if(otp && user_id) {
+        const { body:{ otp:user_code, newPass } } = req;
+
+        if(user_code !== otp) throw new generateErrUtility('Incorrect OTP!',401);       // verify user code
+
+        if(!newPass) throw new generateErrUtility('Please enter password!',422);
+
+        const password = await bcrypt.hash(newPass, 10);       // encrypt newPass
+        if(!password) throw new generateErrUtility('Something went wrong!\nPlease try again later...',500);
+
+        const response = await userModel.findByIdAndUpdate(user_id, { password }, { new: true }).lean();
+        if(!response) throw new generateErrUtility('Unable to reset password!\nPlease try again later...',500);
+
+        res.status(200).send('Password changed successfully!\nYou can login now...');
+
+    } else throw new generateErrUtility('Something went wrong!\nPlease try again later...',500);
 });
 

@@ -6,15 +6,16 @@ export const validateDataUtility = tryCatchUtility(async(req, res, next) => {
     const apisRegexp = {
         signup:         /^\/signup$/,
         login:          /^\/login$/,
+        verifyemail:    /^\/verifyemail$/,
         resetpass:      /^\/resetpass$/,
         editprofile:    /^\/editprofile$/,
         setting:        /^\/setting$/
     };
 
     const { originalUrl:url, body:data } = req;
-    const { login, signup, resetpass, editprofile, setting } = apisRegexp;
+    const { login, signup, verifyemail, resetpass, editprofile, setting } = apisRegexp;
 
-    if(signup.test(url) || login.test(url) || editprofile.test(url) || setting.test(url) || resetpass.test(url))
+    if(signup.test(url) || login.test(url) || editprofile.test(url) || setting.test(url) || verifyemail.test(url))
         if(data.email) await body('email','').isEmail().normalizeEmail().run(req);
 
     if(signup.test(url) || login.test(url))
@@ -34,7 +35,7 @@ export const validateDataUtility = tryCatchUtility(async(req, res, next) => {
         if(data.instagram) await body('instagram','').trim().isString().isLength({ max: 15 }).run(req);
     }
 
-    if(setting.test(url)) {
+    if(setting.test(url) || resetpass.test(url)) {
         if(data.newPass) await body('newPass','').trim().isLength({ min: 8, max: 20 }).isAlphanumeric().run(req);
         if(data.confirmPass) await body('confirmPass','').trim().isLength({ min: 8, max: 20 }).isAlphanumeric().run(req);
     }
